@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reglamento Interno Unificado — Nivelo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D10;
+    --bg2: #141418;
+    --bg3: #1C1C22;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --gold: #C8A84B;
+    --gold-dim: rgba(200,168,75,0.15);
+    --gold-glow: rgba(200,168,75,0.08);
+    --text: #E0DAD0;
+    --text-muted: #7A7570;
+    --text-soft: #A89F95;
+    --accent-red: #9B3A3A;
+    --accent-teal: #2E7A6A;
+    --toc-w: 270px;
+    --header-h: 60px;
+    --progress-h: 2px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: var(--progress-h);
+    background: linear-gradient(90deg, var(--gold) 0%, #E8C96A 100%);
+    z-index: 9999;
+    transition: width 0.05s linear;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: var(--progress-h); left: 0; right: 0;
+    height: var(--header-h);
+    background: rgba(13,13,16,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 999;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-mark {
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .brand-name {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .header-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn-print {
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid rgba(200,168,75,0.3);
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-print:hover { background: rgba(200,168,75,0.25); border-color: rgba(200,168,75,0.5); }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--toc-w) 1fr;
+    padding-top: calc(var(--header-h) + var(--progress-h));
+    align-items: start;
+  }
+
+  /* ── SIDEBAR TOC ── */
+  aside {
+    position: sticky;
+    top: calc(var(--header-h) + var(--progress-h));
+    height: calc(100vh - var(--header-h) - var(--progress-h));
+    overflow-y: auto;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0 3rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border2) transparent;
+    align-self: start;
+  }
+
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+  .toc-header {
+    padding: 0 1.5rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+  }
+
+  .toc-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .toc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .toc-list { list-style: none; }
+
+  .toc-item a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 1.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+  }
+
+  .toc-item a:hover {
+    color: var(--text-soft);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .toc-item.active a {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: var(--gold-glow);
+  }
+
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    min-width: 18px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .toc-item.active .toc-num { color: var(--gold); }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    min-width: 0;
+    padding: 4rem 5rem 8rem;
+    max-width: 860px;
+  }
+
+  /* ── DOCUMENT HEADER ── */
+  .doc-header {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .doc-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 2rem;
+    background: var(--gold-dim);
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(200,168,75,0.2);
+  }
+
+  .doc-tag::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .doc-main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .doc-main-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .doc-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+
+  .doc-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 480px;
+  }
+
+  .doc-meta-item {
+    background: var(--bg2);
+    padding: 0.75rem 1rem;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 3px;
+  }
+
+  .meta-val {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: calc(var(--header-h) + 24px);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    group: true;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    min-width: 28px;
+    padding-top: 5px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-title-wrap { flex: 1; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    margin-bottom: 0;
+  }
+
+  .section-toggle {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 0.2s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .section-toggle svg {
+    width: 10px; height: 10px;
+    stroke: var(--text-muted);
+    transition: transform 0.3s;
+  }
+
+  .section.collapsed .section-toggle svg { transform: rotate(-90deg); }
+  .section-header:hover .section-toggle { background: var(--border); }
+
+  .section-body { overflow: hidden; transition: max-height 0.35s ease; }
+  .section.collapsed .section-body { max-height: 0 !important; }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 0.75rem 0 1.5rem 42px;
+  }
+
+  /* ── BODY TEXT ── */
+  .prose p {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* ── SUBSECTION ── */
+  .subsection {
+    margin-bottom: 2rem;
+  }
+
+  .subsection-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── NUMBERED LIST ── */
+  .rule-list {
+    list-style: none;
+    counter-reset: rules;
+  }
+
+  .rule-list li {
+    counter-increment: rules;
+    display: flex;
+    gap: 14px;
+    font-size: 14.5px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .rule-list li:last-child { border-bottom: none; }
+
+  .rule-list li::before {
+    content: counter(rules, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    min-width: 24px;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── HIGHLIGHT BOXES ── */
+  .callout {
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 3px solid;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .callout-gold {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+  }
+
+  .callout-red {
+    border-color: #8B3A3A;
+    background: rgba(139,58,58,0.08);
+  }
+
+  .callout-teal {
+    border-color: #2E7A6A;
+    background: rgba(46,122,106,0.08);
+  }
+
+  .callout-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .callout-gold .callout-label { color: var(--gold); }
+  .callout-red .callout-label { color: #C06060; }
+  .callout-teal .callout-label { color: #5AA090; }
+
+  .callout p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  /* ── STRIKE LEVELS ── */
+  .strike-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 1.25rem 0;
+  }
+
+  .strike-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .strike-card:hover { border-color: var(--border2); }
+
+  .strike-level {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .strike-card:nth-child(1) .strike-level { color: var(--text-muted); }
+  .strike-card:nth-child(2) .strike-level { color: #B8A060; }
+  .strike-card:nth-child(3) .strike-level { color: #C87830; }
+  .strike-card:nth-child(4) .strike-level { color: #B84040; }
+  .strike-card:nth-child(5) .strike-level { color: #8B2020; }
+
+  .strike-name {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.35;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── RANGES BADGE ── */
+  .ranges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 1rem 0;
+  }
+
+  .range-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .range-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    min-width: 90px;
+    text-align: center;
+  }
+
+  .badge-green { background: rgba(46,122,106,0.15); color: #5AA090; border: 1px solid rgba(46,122,106,0.3); }
+  .badge-yellow { background: rgba(200,168,75,0.1); color: var(--gold); border: 1px solid rgba(200,168,75,0.25); }
+  .badge-red { background: rgba(155,58,58,0.15); color: #C06060; border: 1px solid rgba(155,58,58,0.3); }
+
+  .range-desc { color: var(--text-muted); font-size: 13px; }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 1.25rem 1.75rem;
+    margin: 1.25rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .formula-box span { color: var(--gold); }
+
+  /* ── SEVERITY TAGS ── */
+  .severity-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 1.25rem 0;
+  }
+
+  .severity-col {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .severity-head {
+    padding: 0.65rem 1rem;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sev-leve { background: rgba(90,140,120,0.12); color: #5AA090; }
+  .sev-grave { background: rgba(200,130,50,0.1); color: #C89050; }
+  .sev-muy { background: rgba(155,58,58,0.12); color: #C06060; }
+
+  .severity-items { padding: 0.75rem 1rem; }
+
+  .severity-items li {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .severity-items li:last-child { border-bottom: none; }
+
+  .severity-items li::before {
+    content: '—';
+    flex-shrink: 0;
+    color: var(--border2);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER NOTE ── */
+  .footer-note {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-note-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-note p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.7;
+  }
+
+  /* ── BACK TO TOP ── */
+  #back-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 38px; height: 38px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.2s;
+    z-index: 100;
+  }
+
+  #back-top.visible { opacity: 1; }
+  #back-top:hover { background: var(--border); }
+  #back-top svg { width: 14px; height: 14px; stroke: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { display: none; }
+    main { padding: 2.5rem 1.5rem 6rem; }
+    .severity-section { grid-template-columns: 1fr; }
+    .strike-grid { grid-template-columns: repeat(3, 1fr); }
+    .doc-meta-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    #progress-bar, header, aside, #back-top { display: none !important; }
+    .layout { display: block; }
+    main { padding: 0; }
+    body { background: #fff; color: #111; }
+    .section.collapsed .section-body { max-height: none !important; }
+    .doc-main-title, .section-title { color: #111; }
+    .callout { border-left-width: 2px; }
+  }
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<header>
+  <div class="header-brand">
+    <div class="brand-mark">N</div>
+    <span class="brand-name">Nivelo</span>
+  </div>
+  <span class="header-meta">Reglamento Interno — v1.0 · 2026</span>
+  <div class="header-actions">
+    <button class="btn-print" onclick="window.print()">Imprimir</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside id="toc">
+    <div class="toc-header">
+      <div class="toc-label">Tabla de contenido</div>
+      <div class="toc-title">Reglamento Interno<br>Unificado de Socios</div>
+    </div>
+    <ul class="toc-list" id="toc-list"></ul>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- DOCUMENT HEADER -->
+    <div class="doc-header">
+      <div class="doc-tag">Vigente desde 22 de abril de 2026</div>
+      <h1 class="doc-main-title">Reglamento Interno<br>Unificado de<br><em>Socios Activos</em></h1>
+      <p class="doc-subtitle">Marco obligatorio de organización, disciplina, deberes, criterios de desempeño, autoridad y consecuencias para los socios activos de Nivelo.</p>
+      <div class="doc-meta-grid">
+        <div class="doc-meta-item">
+          <div class="meta-label">Emisión</div>
+          <div class="meta-val">22 · 04 · 2026</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="meta-label">Vigencia</div>
+          <div class="meta-val">Inmediata</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="meta-label">Versión</div>
+          <div class="meta-val">1.0</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="meta-label">Aplicación</div>
+          <div class="meta-val">Socios activos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. OBJETO -->
+    <div class="section" id="s1" data-num="01" data-title="Objeto">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">01</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Objeto</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5">
+            <polyline points="2,3.5 5,6.5 8,3.5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>El presente Reglamento Interno Unificado tiene por objeto establecer el marco obligatorio de organización, disciplina, deberes, criterios de desempeño, autoridad, control interno, consecuencias por incumplimiento y reglas de permanencia aplicables a los socios activos de Nivelo.</p>
+        </div>
+        <ul class="rule-list" style="margin-top:1.25rem;">
+          <li>Proteger a Nivelo, su visión, su reputación, sus activos, su desarrollo, su operación y su proyección futura.</li>
+          <li>Definir de manera clara lo que se espera de toda persona que participe como socio activo.</li>
+          <li>Evitar conflictos internos, ambigüedades, omisiones, abusos de confianza, inactividad y aportes insuficientes.</li>
+          <li>Establecer un sistema verificable de seguimiento, evaluación y consecuencias frente al incumplimiento.</li>
+          <li>Dejar constancia de que la permanencia como socio activo y cualquier reconocimiento societario futuro dependerán del aporte real, del cumplimiento sostenido, de la permanencia efectiva y del desempeño verificable.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. NATURALEZA -->
+    <div class="section" id="s2" data-num="02" data-title="Naturaleza del reglamento">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">02</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Naturaleza del reglamento</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>Mientras Nivelo no se encuentre formalmente constituida como sociedad, este reglamento operará como marco interno obligatorio de organización, disciplina, funcionamiento, responsabilidades y compromisos entre los socios activos vinculados al proyecto.</p>
+          <p>Este reglamento no define porcentajes de participación, repartos patrimoniales ni asignaciones concretas de equity.</p>
+        </div>
+        <div class="callout callout-gold">
+          <div class="callout-label">Reconocimiento societario futuro</div>
+          <p>La evaluación de cualquier reconocimiento societario futuro se realizará únicamente cuando Nivelo se encuentre en <strong>operación comercial activa</strong> y con base en criterios de aporte real, permanencia, cumplimiento y desempeño verificable.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ÁMBITO -->
+    <div class="section" id="s3" data-num="03" data-title="Ámbito de aplicación">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">03</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Ámbito de aplicación</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>El presente reglamento aplica obligatoriamente a toda persona que participe en Nivelo con la condición de <strong style="color:var(--text);font-weight:500;">socio activo</strong>.</p>
+          <p>No aplica a inversionistas, aportantes pasivos ni a personas que no desempeñen un rol activo de ejecución, responsabilidad o gestión dentro de Nivelo.</p>
+          <p>Si en el futuro se crean nuevas clases, perfiles o categorías de socios, su inclusión dentro de este reglamento deberá hacerse mediante modificación expresa aprobada conforme al procedimiento previsto en este documento.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. PRINCIPIOS -->
+    <div class="section" id="s4" data-num="04" data-title="Principios obligatorios">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">04</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Principios obligatorios</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <ul class="rule-list">
+          <li>Lealtad absoluta hacia Nivelo.</li>
+          <li>Transparencia en decisiones, avances, riesgos, compromisos, dinero, acuerdos y resultados.</li>
+          <li>Responsabilidad frente a su rol, tareas, entregables y compromisos.</li>
+          <li>Confidencialidad total sobre toda la información, procesos, activos y desarrollos relacionados con Nivelo.</li>
+          <li>Respeto, profesionalismo y buena fe en su trato con el equipo, clientes, aliados y demás socios.</li>
+          <li>Mentalidad de crecimiento y visión de largo plazo.</li>
+          <li>Meritocracia basada en resultados verificables y no en excusas, percepciones o posiciones nominales.</li>
+          <li>Aporte activo, real y continuo, incompatible con la mera pasividad o permanencia simbólica.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. PERMANENCIA -->
+    <div class="section" id="s5" data-num="05" data-title="Regla general de permanencia">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">05</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Regla general de permanencia</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="callout callout-gold">
+          <div class="callout-label">Principio fundamental</div>
+          <p>La condición de socio activo exige participación real, responsabilidad efectiva y cumplimiento verificable de funciones, tareas, compromisos, metas y estándares de conducta. No bastará con ostentar el título de socio ni mantener una vinculación nominal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. DEBERES -->
+    <div class="section" id="s6" data-num="06" data-title="Deberes generales">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">06</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Deberes generales de los socios activos</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+
+        <div class="subsection">
+          <div class="subsection-title">6.1 · Cumplimiento del rol</div>
+          <ul class="rule-list">
+            <li>Desempeñar de manera diligente el rol que le sea asignado o reconocido.</li>
+            <li>Cumplir tareas, entregables, metas, tiempos y responsabilidades asociadas a su función.</li>
+            <li>Atender las definiciones operativas, priorizaciones y mecanismos de seguimiento.</li>
+            <li>Presentar avances, evidencias y reportes cuando le sean requeridos.</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">6.2 · Honestidad y transparencia</div>
+          <ul class="rule-list">
+            <li>No mentir ni distorsionar información sobre avances, resultados, clientes, producto, finanzas o ejecución.</li>
+            <li>No ocultar errores relevantes, bloqueos, retrasos, incumplimientos o riesgos importantes.</li>
+            <li>Informar oportunamente situaciones que puedan afectar a Nivelo.</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">6.3 · Conducta profesional</div>
+          <ul class="rule-list">
+            <li>Tratar con respeto a los demás socios, miembros del equipo, clientes, aliados y terceros.</li>
+            <li>Abstenerse de humillar, gritar, manipular, intimidar o generar conflictos.</li>
+            <li>Respetar la estructura de decisiones y la autoridad funcional definida en este reglamento.</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">6.4 · Protección de Nivelo</div>
+          <ul class="rule-list">
+            <li>No filtrar información.</li>
+            <li>No dañar la reputación de Nivelo, directa o indirectamente, incluso por medios digitales o redes sociales.</li>
+            <li>No usar recursos, tiempo, herramientas, información o contactos de Nivelo para fines personales o ajenos al proyecto.</li>
+            <li>No apropiarse de activos materiales o inmateriales vinculados con Nivelo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. CONFIDENCIALIDAD -->
+    <div class="section" id="s7" data-num="07" data-title="Confidencialidad y propiedad">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">07</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Confidencialidad, reserva y propiedad de lo desarrollado</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>Toda información, desarrollo, documento, diseño, estrategia, código, proceso, base de datos, modelo, flujo de trabajo o activo intangible creado, usado, organizado o gestionado para Nivelo deberá entenderse reservado y sometido a deber estricto de confidencialidad.</p>
+        </div>
+        <div class="subsection-title" style="margin-top:1.25rem;">Queda prohibido</div>
+        <ul class="rule-list">
+          <li>Compartir información de Nivelo con terceros sin autorización expresa.</li>
+          <li>Usar ideas, desarrollos o activos de Nivelo en proyectos personales o externos.</li>
+          <li>Llevarse, copiar, extraer, reutilizar o reservar clientes, contactos, documentos, procesos o información estratégica.</li>
+          <li>Usar el nombre, avances, materiales o activos de Nivelo para competir, negociar o beneficiarse por fuera del proyecto.</li>
+        </ul>
+        <div class="callout callout-red" style="margin-top:1.25rem;">
+          <div class="callout-label">Vigencia permanente</div>
+          <p>La obligación de confidencialidad y la prohibición de competencia usando información interna serán <strong style="color:#E07070;">indefinidas y permanentes</strong>, incluso después de la salida, separación o desvinculación del socio activo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. DECISIONES -->
+    <div class="section" id="s8" data-num="08" data-title="Reglas sobre decisiones y autoridad">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">08</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Reglas sobre decisiones y autoridad</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>Ningún socio activo podrá actuar como dueño absoluto de Nivelo ni imponer unilateralmente decisiones contrarias al interés del proyecto cuando existan otros socios con participación activa.</p>
+          <p>Las decisiones relevantes deberán quedar por escrito mediante acta, documento o canal oficial de comunicación autorizado por Nivelo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. AUTORIDAD OPERATIVA -->
+    <div class="section" id="s9" data-num="09" data-title="Autoridad operativa especial">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">09</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Autoridad operativa especial</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="prose">
+          <p>En materia operativa tendrán autoridad especial el <strong style="color:var(--text);font-weight:500;">CEO</strong> y el <strong style="color:var(--text);font-weight:500;">Product Manager</strong> de Nivelo.</p>
+        </div>
+        <ul class="rule-list">
+          <li>Definir o coordinar la asignación de tareas, prioridades y entregables.</li>
+          <li>Exigir evidencia objetiva de cumplimiento.</li>
+          <li>Verificar avances, retrasos, bloqueos y desviaciones.</li>
+          <li>Solicitar correcciones, planes de mejora y ajustes de ejecución.</li>
+          <li>Elevar al Comité de Socios los casos de incumplimiento que ameriten evaluación formal.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. COMITÉ -->
+    <div class="section" id="s10" data-num="10" data-title="Comité de Socios">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">10</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Comité de Socios</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="subsection">
+          <div class="subsection-title">10.1 · Integración</div>
+          <div class="prose"><p>Integrado por socios activos que no se encuentren involucrados en el caso concreto ni cumpliendo una sanción incompatible con su participación decisoria.</p></div>
+        </div>
+        <div class="subsection">
+          <div class="subsection-title">10.2 · Reglas de decisión</div>
+          <ul class="rule-list">
+            <li>El socio afectado no votará en su propio caso.</li>
+            <li>Las decisiones del Comité se adoptarán por mayoría.</li>
+            <li>El CEO y el Product Manager podrán hacer parte del Comité.</li>
+            <li>En caso de empate, el criterio conjunto del CEO y/o Product Manager tendrá peso decisorio reforzado.</li>
+            <li>El Comité podrá revertir decisiones operativas previas cuando exista mayoría suficiente para ello.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. COMPROMISOS -->
+    <div class="section" id="s11" data-num="11" data-title="Sistema de compromisos y medición">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">11</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Sistema de compromisos y medición operativa</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="subsection">
+          <div class="subsection-title">Componentes de cada tarea</div>
+          <ul class="rule-list">
+            <li>Responsable único.</li>
+            <li>Fecha límite.</li>
+            <li>Importancia: baja, media, alta o urgente.</li>
+            <li>Definición objetiva de "hecha".</li>
+            <li>Evidencia de entrega.</li>
+            <li>Carácter del plazo: fijo o flexible.</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">11.4 · Fórmula de cumplimiento (ciclos de 2 semanas)</div>
+          <div class="formula-box">
+            <span>Cumplimiento</span> = tareas cumplidas / tareas comprometidas
+          </div>
+          <div class="ranges">
+            <div class="range-row">
+              <span class="range-badge badge-green">≥ 80%</span>
+              <span class="range-desc">Aceptable</span>
+            </div>
+            <div class="range-row">
+              <span class="range-badge badge-yellow">60% – 79%</span>
+              <span class="range-desc">Zona amarilla</span>
+            </div>
+            <div class="range-row">
+              <span class="range-badge badge-red">&lt; 60%</span>
+              <span class="range-desc">Incumplimiento serio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">11.2 · Criterios de incumplimiento</div>
+          <ul class="rule-list">
+            <li>No cumple la definición de "hecha".</li>
+            <li>No tiene evidencia suficiente.</li>
+            <li>No resulta utilizable para el propósito previsto.</li>
+            <li>Se entrega tarde en plazo fijo.</li>
+            <li>Se entrega tarde sin aviso en plazo flexible.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. ANTI-SIMULACIÓN -->
+    <div class="section" id="s12" data-num="12" data-title="Reglas anti-simulación">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">12</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Reglas anti-simulación y anti-trampa</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="subsection-title">No será válido aparentar cumplimiento mediante</div>
+        <ul class="rule-list">
+          <li>Asunción artificial de tareas mínimas o irrelevantes.</li>
+          <li>Baja carga de trabajo injustificada para el rol correspondiente.</li>
+          <li>Tareas de impacto marginal o desalineadas con las necesidades reales de Nivelo.</li>
+          <li>Redefinición de tareas luego del incumplimiento.</li>
+          <li>Reclasificación posterior de la importancia de una tarea.</li>
+        </ul>
+        <div class="callout callout-gold" style="margin-top:1.25rem;">
+          <div class="callout-label">Regla de ambigüedad</div>
+          <p>La ambigüedad imputable al responsable jugará en su contra. La falta de proactividad reiterada podrá ser valorada como incumplimiento.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. STRIKES -->
+    <div class="section" id="s13" data-num="13" data-title="Sistema de strikes">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">13</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Sistema de strikes</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="subsection">
+          <div class="subsection-title">Causales de strike</div>
+          <ul class="rule-list">
+            <li>Una medición de incumplimiento serio (&lt;60%).</li>
+            <li>Dos mediciones amarillas consecutivas.</li>
+            <li>Fallo de una tarea alta que afecte entregables o dependencias.</li>
+            <li>Incumplimiento de una tarea urgente que perjudique claramente a Nivelo.</li>
+            <li>Comisión de una falta grave.</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Niveles de alerta</div>
+          <div class="strike-grid">
+            <div class="strike-card">
+              <div class="strike-level">N0</div>
+              <div class="strike-name">Normalidad</div>
+            </div>
+            <div class="strike-card">
+              <div class="strike-level">N1</div>
+              <div class="strike-name">Aviso formal</div>
+            </div>
+            <div class="strike-card">
+              <div class="strike-level">N2</div>
+              <div class="strike-name">Pérdida parcial decisión</div>
+            </div>
+            <div class="strike-card">
+              <div class="strike-level">N3</div>
+              <div class="strike-name">Revisión continuidad</div>
+            </div>
+            <div class="strike-card">
+              <div class="strike-level">N4</div>
+              <div class="strike-name">Salida del rol operativo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">13.2 · Caducidad</div>
+          <div class="prose">
+            <p>Los strikes caducarán después de <strong style="color:var(--text);font-weight:400;">seis (6) meses</strong> sin faltas ni incumplimientos relevantes. Dos strikes en dos meses activarán revisión automática.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. FALTAS -->
+    <div class="section" id="s14" data-num="14" data-title="Clasificación de faltas">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">14</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Clasificación de faltas</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="severity-section">
+          <div class="severity-col">
+            <div class="severity-head sev-leve">Leves</div>
+            <ul class="severity-items">
+              <li>Llegar tarde repetidamente a reuniones sin justificación.</li>
+              <li>Incumplimientos operativos menores no reiterados.</li>
+              <li>Actitud negativa o falta de cooperación.</li>
+              <li>No responder comunicaciones en tiempo razonable.</li>
+            </ul>
+          </div>
+          <div class="severity-col">
+            <div class="severity-head sev-grave">Graves</div>
+            <ul class="severity-items">
+              <li>Incumplir repetidamente responsabilidades clave.</li>
+              <li>Discutir agresivamente, insultar o afectar el ambiente de trabajo.</li>
+              <li>Hablar mal de Nivelo ante terceros de forma lesiva.</li>
+              <li>Ocultar información importante.</li>
+              <li>Desobedecer decisiones aprobadas.</li>
+              <li>Falta de proactividad reiterada.</li>
+            </ul>
+          </div>
+          <div class="severity-col">
+            <div class="severity-head sev-muy">Muy graves</div>
+            <ul class="severity-items">
+              <li>Robar dinero, equipos, accesos o información.</li>
+              <li>Filtrar secretos internos.</li>
+              <li>Cometer fraude, estafa o manipulación financiera.</li>
+              <li>Crear competencia usando recursos internos de Nivelo.</li>
+              <li>Violencia física, amenazas, acoso laboral o sexual.</li>
+              <li>Firmar acuerdos no autorizados causando perjuicio.</li>
+              <li>Abandonar el proyecto sin aviso en etapa crítica.</li>
+              <li>Apropiarse de activos o relaciones de Nivelo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. CONSECUENCIAS -->
+    <div class="section" id="s15" data-num="15" data-title="Consecuencias">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">15</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Consecuencias</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <ul class="rule-list">
+          <li>Advertencia verbal.</li>
+          <li>Advertencia escrita.</li>
+          <li>Aviso formal.</li>
+          <li>Plan correctivo.</li>
+          <li>Seguimiento cercano.</li>
+          <li>Pérdida temporal o parcial de poder de decisión.</li>
+          <li>Validación previa de tareas y entregables.</li>
+          <li>Suspensión temporal del cargo o del rol operativo.</li>
+          <li>Retiro temporal o definitivo de accesos a sistemas, repositorios, cuentas y herramientas.</li>
+          <li>Revisión de continuidad en el rol operativo.</li>
+          <li>Cambio a rol pasivo, si el Comité lo considera adecuado.</li>
+          <li>Salida del rol operativo.</li>
+          <li>Congelación de bonus, comisiones o incentivos operativos no consolidados.</li>
+          <li>Afectación de prerrogativas o reconocimientos societarios futuros.</li>
+          <li>Pérdida de equity futuro no consolidado o expectativa de reconocimiento societario.</li>
+          <li>Expulsión o salida total del proyecto en casos de gravedad suficiente.</li>
+          <li>Inicio de acciones legales o reclamaciones por daños cuando resulte procedente.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 16. CONSECUENCIAS SOCIETARIAS -->
+    <div class="section" id="s16" data-num="16" data-title="Consecuencias societarias y salida total">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">16</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Regla sobre consecuencias societarias y salida total</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="callout callout-red">
+          <div class="callout-label">Consecuencias por incumplimiento grave</div>
+          <p>El incumplimiento grave o muy grave, así como los patrones reiterados de incumplimiento, podrán dar lugar a pérdida de cualquier expectativa de reconocimiento societario futuro, pérdida de equity no consolidado, revisión integral de continuidad o salida total del proyecto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. MEDIDAS PROVISIONALES -->
+    <div class="section" id="s17" data-num="17" data-title="Medidas provisionales">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">17</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Medidas provisionales inmediatas</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <ul class="rule-list">
+          <li>Retiro temporal de accesos.</li>
+          <li>Suspensión temporal del rol operativo.</li>
+          <li>Limitación provisional del poder de decisión.</li>
+          <li>Restricción de actuación en nombre de Nivelo.</li>
+          <li>Protección urgente de información, activos y canales de operación.</li>
+        </ul>
+        <div class="prose" style="margin-top:1rem;">
+          <p>La adopción de medidas provisionales no elimina el derecho del socio afectado a ser oído en los términos de este reglamento.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 18. DERECHO DE DEFENSA -->
+    <div class="section" id="s18" data-num="18" data-title="Derecho de defensa">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">18</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Derecho de defensa</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="callout callout-teal">
+          <div class="callout-label">Plazo de defensa</div>
+          <p>El socio señalado por una presunta falta tendrá derecho a solicitar reunión con el Comité de Socios y a exponer su versión, explicaciones, soportes y argumentos dentro de los <strong style="color:#7AC0B0;font-weight:400;">cinco (5) días</strong> siguientes a la notificación formal del caso. Si transcurrido dicho plazo no solicita la reunión sin justificación razonable, el Comité podrá decidir con la información disponible.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 19. REGLAS DE SALIDA -->
+    <div class="section" id="s19" data-num="19" data-title="Reglas de salida">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">19</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Reglas de salida</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <ul class="rule-list">
+          <li>Entregar accesos, documentos, desarrollos, materiales, claves, cuentas, relaciones y demás elementos vinculados con Nivelo.</li>
+          <li>Abstenerse de llevarse clientes, equipo, contactos, información o activos del proyecto.</li>
+          <li>Abstenerse de hablar en nombre de Nivelo o perjudicar su reputación.</li>
+          <li>Mantener la confidencialidad y las restricciones de uso por tiempo indefinido.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 20–24 agrupados -->
+    <div class="section" id="s20" data-num="20–24" data-title="Disposiciones finales">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="section-num">20–24</span>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Disposiciones finales</h2>
+        </div>
+        <div class="section-toggle">
+          <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><polyline points="2,3.5 5,6.5 8,3.5"/></svg>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-body">
+        <div class="subsection">
+          <div class="subsection-title">20 · Reuniones y soporte documental</div>
+          <div class="prose"><p>Nivelo tendrá reuniones de seguimiento según lo convoque el Product Manager, el CEO o la mayoría del Comité. Los reportes de avance constituirán soporte para la medición quincenal. Las decisiones importantes deberán quedar documentadas por escrito.</p></div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">21 · Modificaciones del reglamento</div>
+          <div class="prose"><p>Toda modificación, adición o actualización deberá constar por escrito y ser aprobada por mayoría del Comité de Socios.</p></div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">22 · Aceptación y permanencia</div>
+          <div class="callout callout-gold">
+            <div class="callout-label">Plazo de aceptación</div>
+            <p>Los socios activos actuales dispondrán de <strong style="color:var(--gold);font-weight:400;">quince (15) días calendario</strong> desde su comunicación formal para manifestar aceptación expresa. La falta de aceptación habilitará al Comité para adoptar las medidas correspondientes.</p>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">23 · Cláusula de interpretación</div>
+          <div class="prose"><p>Este reglamento deberá interpretarse de buena fe, en función de la protección de Nivelo, de la continuidad del proyecto y del principio de que ningún reconocimiento futuro puede desvincularse del aporte verdadero, de la permanencia efectiva y del desempeño verificable.</p></div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">24 · Disposición final</div>
+          <div class="prose"><p>Todos los socios activos de Nivelo deberán conocer, entender y aceptar el presente reglamento como condición de permanencia, organización y funcionamiento interno del proyecto.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER NOTE -->
+    <div class="footer-note">
+      <div class="footer-note-label">Nota técnica para versión posterior</div>
+      <p>Cuando Nivelo sea formalmente constituida, este reglamento deberá ser revisado para armonizarlo con el pacto de socios, estatutos, reglas de vesting, mecanismos de salida, propiedad intelectual, confidencialidad reforzada y demás instrumentos legales de la sociedad.</p>
+    </div>
+
+  </main>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">
+  <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5">
+    <polyline points="2,9 7,4 12,9"/>
+  </svg>
+</button>
+
+<script>
+  // Build TOC
+  const tocList = document.getElementById('toc-list');
+  const sections = document.querySelectorAll('.section');
+  const tocItems = [];
+
+  sections.forEach(sec => {
+    const num = sec.dataset.num;
+    const title = sec.dataset.title;
+    const li = document.createElement('li');
+    li.className = 'toc-item';
+    li.dataset.id = sec.id;
+    li.innerHTML = `<a href="#${sec.id}"><span class="toc-num">${num}</span><span>${title}</span></a>`;
+    tocList.appendChild(li);
+    tocItems.push(li);
+  });
+
+  // Progress bar
+  const progressBar = document.getElementById('progress-bar');
+  const backTop = document.getElementById('back-top');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+    backTop.classList.toggle('visible', scrollTop > 300);
+    updateActiveTOC();
+  });
+
+  function updateActiveTOC() {
+    let active = null;
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 100) active = sec.id;
+    });
+    tocItems.forEach(li => {
+      li.classList.toggle('active', active && li.dataset.id === active);
+    });
+  }
+
+  // Collapsible sections
+  function toggleSection(header) {
+    const section = header.closest('.section');
+    const body = section.querySelector('.section-body');
+    const isCollapsed = section.classList.contains('collapsed');
+    if (isCollapsed) {
+      section.classList.remove('collapsed');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      setTimeout(() => { body.style.maxHeight = 'none'; }, 360);
+    } else {
+      body.style.maxHeight = body.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        section.classList.add('collapsed');
+      });
+    }
+  }
+
+  // Set initial max-height for all open sections
+  sections.forEach(sec => {
+    const body = sec.querySelector('.section-body');
+    if (body) body.style.maxHeight = 'none';
+  });
+
+  updateActiveTOC();
+</script>
+</body>
+</html>
